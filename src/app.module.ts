@@ -9,6 +9,7 @@ import { LoggerModule } from './core/logger/logger.module';
 
 import { configuration, envValidationSchema } from './core/config';
 import { HealthModule } from './modules/health/health.module';
+import { UsersModule } from './modules/users';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { HealthModule } from './modules/health/health.module';
     PrismaModule,
     LoggerModule,
     HealthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

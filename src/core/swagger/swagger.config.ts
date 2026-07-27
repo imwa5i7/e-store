@@ -1,8 +1,8 @@
 import { DocumentBuilder } from '@nestjs/swagger';
 
 export const swaggerConfig = new DocumentBuilder()
-  .setTitle('Commerce Engine API')
-  .setDescription('REST API for the Commerce Engine')
+  .setTitle('E StoreAPI')
+  .setDescription('REST API for the E Store')
   .setVersion('1.0.0')
   .addBearerAuth(
     {
