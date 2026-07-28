@@ -10,6 +10,10 @@ import { LoggerModule } from './core/logger/logger.module';
 import { configuration, envValidationSchema } from './core/config';
 import { HealthModule } from './modules/health/health.module';
 import { UsersModule } from './modules/users';
+import { PasswordService } from './modules/auth/services/jwt.services.';
+import { LocalStrategy } from './modules/auth/strategies/local.strategy';
+import { JwtStrategy } from './modules/auth/strategies/jwt.strategy';
+import { AuthModule } from './modules/auth';
 
 @Module({
   imports: [
@@ -23,8 +27,9 @@ import { UsersModule } from './modules/users';
     LoggerModule,
     HealthModule,
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, PasswordService, JwtStrategy, LocalStrategy],
 })
 export class AppModule {}
