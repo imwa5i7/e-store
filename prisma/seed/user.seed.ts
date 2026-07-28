@@ -1,21 +1,10 @@
-import dotenv from 'dotenv';
-
-dotenv.config({
-  path: '.env.development',
-});
-
-import { PrismaPg } from '@prisma/adapter-pg';
-import { PrismaClient, UserRole } from '@prisma/client';
 import { faker } from '@faker-js/faker';
+import { PrismaClient, UserRole } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
-const prisma = new PrismaClient({
-  adapter: new PrismaPg({
-    connectionString: process.env.DATABASE_URL!,
-  }),
-});
+export async function seedUsers(prisma: PrismaClient): Promise<void> {
+  console.log('🌱 Seeding users...');
 
-async function main() {
   await prisma.user.deleteMany();
 
   const password = await bcrypt.hash('Password123!', 10);
@@ -37,14 +26,5 @@ async function main() {
     data: users,
   });
 
-  console.log(`✅ Seeded ${users.length} users`);
+  console.log(`✅ Seeded ${users.length} users.`);
 }
-
-main()
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });

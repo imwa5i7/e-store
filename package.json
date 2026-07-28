@@ -23,7 +23,7 @@
     "db:psql": "docker exec -it e-store-postgres psql -U postgres -d e_store"
   },
   "prisma": {
-    "seed": "tsx prisma/seed/users.seed.ts"
+    "seed": "tsx prisma/seed/seed.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -46,6 +46,7 @@
     "passport-local": "^1.0.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
+    "slugify": "^1.6.9",
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {

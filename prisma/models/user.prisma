@@ -6,7 +6,7 @@ model User {
 
   firstName String
   lastName  String
-  phone String?
+  phone     String?
 
   role UserRole @default(CUSTOMER)
 

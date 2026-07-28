@@ -14,6 +14,7 @@ import { PasswordService } from './modules/auth/services/jwt.services.';
 import { LocalStrategy } from './modules/auth/strategies/local.strategy';
 import { JwtStrategy } from './modules/auth/strategies/jwt.strategy';
 import { AuthModule } from './modules/auth';
+import { CategoriesModule } from './modules/catergories';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { AuthModule } from './modules/auth';
     HealthModule,
     UsersModule,
     AuthModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService, PasswordService, JwtStrategy, LocalStrategy],
