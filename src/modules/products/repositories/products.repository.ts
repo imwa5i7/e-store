@@ -25,6 +25,9 @@ export class ProductRepository implements IProductRepository {
       orderBy: {
         createdAt: 'desc',
       },
+      include: {
+        images: true,
+      },
     });
   }
 
@@ -33,6 +36,9 @@ export class ProductRepository implements IProductRepository {
       where: {
         id,
         deletedAt: null,
+      },
+      include: {
+        images: true,
       },
     });
   }
@@ -43,6 +49,9 @@ export class ProductRepository implements IProductRepository {
         slug,
         deletedAt: null,
       },
+      include: {
+        images: true,
+      },
     });
   }
 
@@ -51,6 +60,9 @@ export class ProductRepository implements IProductRepository {
       where: {
         sku,
         deletedAt: null,
+      },
+      include: {
+        images: true,
       },
     });
   }

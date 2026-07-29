@@ -1,5 +1,11 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Product, ProductStatus } from '@prisma/client';
+import { Product, ProductImage, ProductStatus } from '@prisma/client';
+
+import { ProductImageResponseDto } from './product-image-response.dto';
+
+type ProductWithImages = Product & {
+  images: ProductImage[];
+};
 
 export class ProductResponseDto {
   @ApiProperty({
@@ -48,13 +54,19 @@ export class ProductResponseDto {
   })
   brandId: number;
 
+  @ApiProperty({
+    type: [ProductImageResponseDto],
+    example: [],
+  })
+  images: ProductImageResponseDto[];
+
   @ApiProperty()
   createdAt: Date;
 
   @ApiProperty()
   updatedAt: Date;
 
-  constructor(product: Product) {
+  constructor(product: ProductWithImages) {
     this.id = product.id;
     this.name = product.name;
     this.slug = product.slug;
@@ -64,6 +76,11 @@ export class ProductResponseDto {
     this.isFeatured = product.isFeatured;
     this.categoryId = product.categoryId;
     this.brandId = product.brandId;
+
+    this.images = product.images.map(
+      (image) => new ProductImageResponseDto(image),
+    );
+
     this.createdAt = product.createdAt;
     this.updatedAt = product.updatedAt;
   }

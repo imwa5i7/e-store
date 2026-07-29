@@ -7,7 +7,13 @@ dotenv.config({
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '@prisma/client';
 
-import { seedBrands, seedCategories, seedUsers } from '../seed';
+import {
+  seedBrands,
+  seedCategories,
+  seedProductImages,
+  seedProducts,
+  seedUsers,
+} from '../seed';
 const prisma = new PrismaClient({
   adapter: new PrismaPg({
     connectionString: process.env.DATABASE_URL!,
@@ -16,15 +22,11 @@ const prisma = new PrismaClient({
 
 async function main(): Promise<void> {
   console.log('🚀 Starting database seed...');
-
-  // Delete in dependency order
-  await prisma.category.deleteMany();
-  await prisma.user.deleteMany();
-
   await seedUsers(prisma);
   await seedCategories(prisma);
   await seedBrands(prisma);
-
+  await seedProducts(prisma);
+  await seedProductImages(prisma);
   console.log('🎉 Database seeded successfully.');
 }
 
