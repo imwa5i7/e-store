@@ -1,0 +1,28 @@
+model Product {
+  id          Int           @id @default(autoincrement())
+  name        String
+  slug        String        @unique
+  description String?
+  sku         String        @unique
+  status      ProductStatus @default(DRAFT)
+  isFeatured  Boolean       @default(false)
+  categoryId  Int
+  category    Category      @relation(fields: [categoryId], references: [id])
+  brandId     Int
+  brand       Brand         @relation(fields: [brandId], references: [id])
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  deletedAt   DateTime?
+
+  @@index([categoryId])
+  @@index([brandId])
+  @@index([status])
+  @@index([deletedAt])
+}
+
+enum ProductStatus {
+  DRAFT
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
