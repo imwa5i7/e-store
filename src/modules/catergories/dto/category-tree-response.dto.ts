@@ -8,7 +8,7 @@ export class CategoryTreeResponseDto {
   name!: string;
 
   @ApiProperty()
-  slug!: string;
+  slug?: string;
 
   @ApiProperty({
     nullable: true,
@@ -18,7 +18,7 @@ export class CategoryTreeResponseDto {
   @ApiProperty({
     nullable: true,
   })
-  imageUrl!: string | null;
+  imageUrl?: string | null;
 
   @ApiProperty()
   sortOrder!: number;
@@ -29,7 +29,7 @@ export class CategoryTreeResponseDto {
   @ApiProperty({
     nullable: true,
   })
-  parentId!: number | null;
+  parentId?: number | null;
 
   @ApiProperty({
     type: () => [CategoryTreeResponseDto],

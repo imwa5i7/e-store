@@ -15,6 +15,7 @@ import { LocalStrategy } from './modules/auth/strategies/local.strategy';
 import { JwtStrategy } from './modules/auth/strategies/jwt.strategy';
 import { AuthModule } from './modules/auth';
 import { CategoriesModule } from './modules/catergories';
+import { BrandsModule } from './modules/brands';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { CategoriesModule } from './modules/catergories';
     UsersModule,
     AuthModule,
     CategoriesModule,
+    BrandsModule,
   ],
   controllers: [AppController],
   providers: [AppService, PasswordService, JwtStrategy, LocalStrategy],

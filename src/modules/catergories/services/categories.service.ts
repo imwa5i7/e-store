@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   ConflictException,
+  Inject,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -12,11 +13,15 @@ import {
   CreateCategoryDto,
   UpdateCategoryDto,
 } from '../dto';
-import { CategoriesRepository } from '../repositories/categories.repository';
+import type { ICategoriesRepository } from '../repositories/categories.repository.interface';
+import { CATEGORIES_REPOSITORY } from '../categories.constants';
 
 @Injectable()
 export class CategoriesService {
-  constructor(private readonly categoriesRepository: CategoriesRepository) {}
+  constructor(
+    @Inject(CATEGORIES_REPOSITORY)
+    private readonly categoriesRepository: ICategoriesRepository,
+  ) {}
 
   async create(dto: CreateCategoryDto): Promise<CategoryResponseDto> {
     if (await this.categoriesRepository.existsByName(dto.name)) {
@@ -201,7 +206,7 @@ export class CategoriesService {
       if (category.parentId === null) {
         tree.push(category);
       } else {
-        const parent = map.get(category.parentId);
+        const parent = map.get(category.parentId!);
 
         if (parent) {
           parent.children.push(category);

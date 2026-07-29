@@ -8,6 +8,6 @@ export * from './repositories/categories.repository';
 
 export * from './repositories/categories.repository.interface';
 
-export * from './constants/injection-tokens';
+export * from './categories.constants';
 
 export * from './dto';
