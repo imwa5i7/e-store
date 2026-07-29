@@ -1,16 +1,12 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Prisma, ProductImage } from '@prisma/client';
 
 import { PrismaService } from '../../../database/prisma.service';
 import type { IProductImagesRepository } from '../repositories';
-import { PRODUCT_IMAGES_REPOSITORY } from '../product.constants';
 
 @Injectable()
 export class ProductImagesRepository implements IProductImagesRepository {
-  constructor(
-    @Inject(PRODUCT_IMAGES_REPOSITORY)
-    private readonly prisma: PrismaService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   create(data: Prisma.ProductImageCreateInput): Promise<ProductImage> {
     return this.prisma.productImage.create({

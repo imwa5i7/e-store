@@ -18,8 +18,7 @@ import {
 import { Product } from '@prisma/client';
 
 import { CreateProductDto, UpdateProductDto } from '../dto';
-import { ProductsService } from '@/modules/products';
-
+import { ProductsService } from '../services/products.service';
 @ApiTags('Products')
 @Controller('products')
 export class ProductsController {
