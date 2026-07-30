@@ -34,5 +34,6 @@ import {
     },
   ],
   controllers: [ProductsController, ProductImagesController],
+  exports: [ProductsService],
 })
 export class ProductsModule {}

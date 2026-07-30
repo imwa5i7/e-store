@@ -12,6 +12,7 @@ model Product {
   brand       Brand          @relation(fields: [brandId], references: [id])
   images      ProductImage[]
   inventory   Inventory?
+  price       ProductPrice?
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
   deletedAt   DateTime?

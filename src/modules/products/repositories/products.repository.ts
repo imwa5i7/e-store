@@ -28,6 +28,7 @@ export class ProductRepository implements IProductRepository {
       include: {
         images: true,
         inventory: true,
+        price: true,
       },
     });
   }
@@ -41,6 +42,7 @@ export class ProductRepository implements IProductRepository {
       include: {
         images: true,
         inventory: true,
+        price: true,
       },
     });
   }
@@ -54,6 +56,7 @@ export class ProductRepository implements IProductRepository {
       include: {
         images: true,
         inventory: true,
+        price: true,
       },
     });
   }
@@ -67,6 +70,7 @@ export class ProductRepository implements IProductRepository {
       include: {
         images: true,
         inventory: true,
+        price: true,
       },
     });
   }
