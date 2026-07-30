@@ -17,6 +17,7 @@ import { AuthModule } from './modules/auth';
 import { CategoriesModule } from './modules/catergories';
 import { BrandsModule } from './modules/brands';
 import { ProductsModule } from './modules/products';
+import { InventoryModule } from './modules/inventory';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { ProductsModule } from './modules/products';
     CategoriesModule,
     BrandsModule,
     ProductsModule,
+    InventoryModule,
   ],
   controllers: [AppController],
   providers: [AppService, PasswordService, JwtStrategy, LocalStrategy],

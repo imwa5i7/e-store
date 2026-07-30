@@ -2,6 +2,7 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Product, ProductImage, ProductStatus } from '@prisma/client';
 
 import { ProductImageResponseDto } from './product-image-response.dto';
+import { InventoryResponseDto } from '@/modules/inventory';
 
 type ProductWithImages = Product & {
   images: ProductImage[];
@@ -59,6 +60,12 @@ export class ProductResponseDto {
     example: [],
   })
   images: ProductImageResponseDto[];
+
+  @ApiProperty({
+    type: InventoryResponseDto,
+    nullable: true,
+  })
+  inventory?: InventoryResponseDto;
 
   @ApiProperty()
   createdAt: Date;

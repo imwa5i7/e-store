@@ -11,6 +11,7 @@ model Product {
   brandId     Int
   brand       Brand          @relation(fields: [brandId], references: [id])
   images      ProductImage[]
+  inventory   Inventory?
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
   deletedAt   DateTime?
