@@ -1,20 +1,22 @@
 model Product {
-  id          Int            @id @default(autoincrement())
+  id          Int              @id @default(autoincrement())
   name        String
-  slug        String         @unique
+  slug        String           @unique
   description String?
-  sku         String         @unique
-  status      ProductStatus  @default(DRAFT)
-  isFeatured  Boolean        @default(false)
+  sku         String           @unique
+  status      ProductStatus    @default(DRAFT)
+  isFeatured  Boolean          @default(false)
   categoryId  Int
-  category    Category       @relation(fields: [categoryId], references: [id])
+  category    Category         @relation(fields: [categoryId], references: [id])
   brandId     Int
-  brand       Brand          @relation(fields: [brandId], references: [id])
+  brand       Brand            @relation(fields: [brandId], references: [id])
   images      ProductImage[]
   inventory   Inventory?
   price       ProductPrice?
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
+  variants    ProductVariant[]
+  options     ProductOption[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
   deletedAt   DateTime?
 
   @@index([categoryId])
