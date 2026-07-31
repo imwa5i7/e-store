@@ -8,6 +8,7 @@ import { ProductImagesController } from './controllers/product-images.controller
 
 import { ProductsService } from './services/products.service';
 import { ProductImagesService } from './services/product-images.service';
+import { ProductSearchService } from './services/product-search.service';
 
 import { ProductRepository } from './repositories/products.repository';
 import { ProductImagesRepository } from './repositories/product-images.repository';
@@ -22,6 +23,7 @@ import {
   providers: [
     ProductsService,
     ProductImagesService,
+    ProductSearchService,
 
     {
       provide: PRODUCT_REPOSITORY,

@@ -7,9 +7,11 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import {
   ApiCreatedResponse,
+  ApiBadRequestResponse,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
@@ -17,8 +19,11 @@ import {
 
 import { Product } from '@prisma/client';
 
-import { CreateProductDto, UpdateProductDto } from '../dto';
-import { ProductsService } from '../services/products.service';
+import { CreateProductDto, SearchProductsDto, UpdateProductDto } from '../dto';
+import {
+  PaginatedProductsResponse,
+  ProductsService,
+} from '../services/products.service';
 @ApiTags('Products')
 @Controller('products')
 export class ProductsController {
@@ -37,13 +42,18 @@ export class ProductsController {
 
   @Get()
   @ApiOperation({
-    summary: 'List products',
+    summary: 'Search, filter, sort, and paginate products',
   })
   @ApiOkResponse({
     description: 'Products fetched successfully',
   })
-  async findAll(): Promise<Product[]> {
-    return this.productService.findAll();
+  @ApiBadRequestResponse({
+    description: 'Invalid search filters or pagination values.',
+  })
+  async findAll(
+    @Query() dto: SearchProductsDto,
+  ): Promise<PaginatedProductsResponse> {
+    return this.productService.search(dto);
   }
 
   @Get(':id')

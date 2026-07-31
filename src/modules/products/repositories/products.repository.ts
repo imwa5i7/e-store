@@ -5,7 +5,9 @@ import { PrismaService } from '@/database';
 
 import { CreateProductDto } from '../dto/create-product.dto';
 import { UpdateProductDto } from '../dto/update-product.dto';
+import { ProductSearchQuery } from '../services/product-search.service';
 import { IProductRepository } from '../repositories';
+import { ProductSearchResult } from './products.repository.interface';
 
 @Injectable()
 export class ProductRepository implements IProductRepository {
@@ -31,6 +33,37 @@ export class ProductRepository implements IProductRepository {
         price: true,
       },
     });
+  }
+
+  async search(query: ProductSearchQuery): Promise<ProductSearchResult> {
+    const [total, data] = await this.prisma.$transaction([
+      this.prisma.product.count({ where: query.where }),
+      this.prisma.product.findMany({
+        ...query,
+        include: {
+          category: true,
+          brand: true,
+          images: true,
+          price: true,
+          inventory: true,
+          variants: {
+            include: {
+              optionValues: {
+                include: {
+                  optionValue: {
+                    include: {
+                      option: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      }),
+    ]);
+
+    return { total, data };
   }
 
   async findById(id: number): Promise<Product | null> {

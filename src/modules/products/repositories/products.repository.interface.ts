@@ -2,11 +2,19 @@ import { Product } from '@prisma/client';
 
 import { CreateProductDto } from '../dto/create-product.dto';
 import { UpdateProductDto } from '../dto/update-product.dto';
+import { ProductSearchQuery } from '../services/product-search.service';
+
+export interface ProductSearchResult {
+  data: Product[];
+  total: number;
+}
 
 export interface IProductRepository {
   create(data: CreateProductDto & { slug: string }): Promise<Product>;
 
   findAll(): Promise<Product[]>;
+
+  search(query: ProductSearchQuery): Promise<ProductSearchResult>;
 
   findById(id: number): Promise<Product | null>;
 
