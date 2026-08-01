@@ -4,6 +4,7 @@ import {
   ArrayUnique,
   IsArray,
   IsBoolean,
+  IsInt,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -24,7 +25,7 @@ export class CreateVariantDto {
   })
   @IsArray()
   @ArrayUnique()
-  @IsString({ each: true })
+  @IsInt({ each: true })
   optionValueIds!: number[];
 
   @ApiPropertyOptional({
